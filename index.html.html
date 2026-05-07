@@ -38,6 +38,7 @@
       transform: translateX(-120%);
       background: linear-gradient(110deg, transparent, rgba(255,255,255,.35), transparent);
       transition: transform .8s ease;
+      pointer-events: none;
     }
     .shine:hover::after { transform: translateX(120%); }
     .premium-card { transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
@@ -45,6 +46,27 @@
     .gold-text { background: linear-gradient(90deg, #92400e, #f59e0b, #92400e); -webkit-background-clip: text; background-clip: text; color: transparent; }
     @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
     .floaty { animation: floaty 5s ease-in-out infinite; }
+  
+    @media (max-width: 767px) {
+      body::after { background-size: 26px 26px; opacity: .025; }
+      header > div { padding: 14px 16px !important; }
+      header .gold-text { font-size: 1.55rem; }
+      header a[href="#contact"] { padding: 10px 14px !important; font-size: 12px !important; white-space: nowrap; }
+      section { scroll-margin-top: 88px; }
+      h1 { font-size: 2.65rem !important; line-height: .95 !important; letter-spacing: -0.04em; }
+      h2 { font-size: 2rem !important; line-height: 1.05 !important; letter-spacing: -0.035em; }
+      p { font-size: .98rem; }
+      .floaty { animation: none; }
+      .premium-card:hover { transform: none; box-shadow: inherit; }
+      .mobile-cv-preview { height: 360px !important; transform: scale(.92); transform-origin: top center; margin-bottom: -28px; }
+      .mobile-cv-preview aside { width: 37% !important; padding: 14px !important; }
+      .mobile-cv-preview main { padding: 14px !important; }
+      .mobile-scroll { display: flex !important; overflow-x: auto; gap: 14px; padding-bottom: 10px; scroll-snap-type: x mandatory; }
+      .mobile-scroll > * { min-width: 84%; scroll-snap-align: start; }
+      .mobile-scroll::-webkit-scrollbar { display: none; }
+      .mobile-sticky-cta { position: fixed; left: 14px; right: 14px; bottom: 14px; z-index: 9999; display: flex; gap: 10px; padding: 10px; border-radius: 22px; background: rgba(255,255,255,.92); backdrop-filter: blur(18px); box-shadow: 0 20px 60px rgba(15,23,42,.22); border: 1px solid rgba(180,83,9,.18); pointer-events: auto; }
+      .mobile-sticky-cta a { flex: 1; text-align: center; border-radius: 16px; padding: 12px 14px; font-weight: 800; font-size: 13px; }
+    }
   </style>
 </head>
 <body class="bg-[#f7f3ec] text-slate-950">
@@ -61,6 +83,15 @@
         <a href="#tarifs" class="rounded-full px-5 py-2 text-sm font-bold text-slate-700 hover:bg-amber-700 hover:text-white">Tarifs</a>
         <a href="#avis" class="rounded-full px-5 py-2 text-sm font-bold text-slate-700 hover:bg-amber-700 hover:text-white">Avis</a>
       </nav>
+      <div class="absolute left-0 right-0 top-full z-[9999] border-b border-amber-900/10 bg-[#f7f3ec]/95 px-4 py-3 backdrop-blur-xl md:hidden">
+        <div class="flex gap-2 overflow-x-auto">
+          <a href="#services" class="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm">Services</a>
+          <a href="#apropos" class="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm">À propos</a>
+          <a href="#fonctionnement" class="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm">Fonctionnement</a>
+          <a href="#tarifs" class="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm">Tarifs</a>
+          <a href="#avis" class="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm">Avis</a>
+        </div>
+      </div>
       <a href="#contact" class="shine rounded-full bg-slate-950 px-6 py-3 text-sm font-bold text-white shadow-xl shadow-slate-900/20 transition hover:bg-amber-800">Demander mon CV</a>
     </div>
   </header>
@@ -70,7 +101,7 @@
       <div class="absolute left-1/2 top-0 h-[620px] w-[620px] -translate-x-1/2 rounded-full bg-amber-300/30 blur-3xl"></div>
       <div class="absolute -right-40 top-24 h-[420px] w-[420px] rounded-full bg-slate-950/10 blur-3xl"></div>
       <div class="absolute -left-40 bottom-0 h-[420px] w-[420px] rounded-full bg-amber-700/10 blur-3xl"></div>
-      <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 md:grid-cols-2 md:py-28">
+      <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-28 md:grid-cols-2 md:px-6 md:py-28">
         <div class="relative z-10">
           <div class="mb-7 inline-flex items-center gap-3 rounded-full border border-amber-700/20 bg-white/70 px-5 py-3 text-sm font-semibold text-amber-800 shadow-sm">
             <span class="h-2 w-2 rounded-full bg-amber-600"></span>
@@ -96,8 +127,8 @@
           <div class="absolute -bottom-6 right-8 z-20 hidden rounded-2xl bg-amber-400 px-5 py-4 shadow-xl md:block">
             <div class="text-sm font-black">Prêt à postuler</div><div class="text-xs text-slate-800">PDF professionnel</div>
           </div>
-          <div class="floaty rounded-[2.5rem] border border-white/80 bg-white/90 p-5 shadow-[0_40px_120px_rgba(15,23,42,0.20)] backdrop-blur">
-            <div class="relative h-[460px] overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-blue-900 to-blue-700 p-5">
+          <div class="floaty rounded-[2.5rem] border border-white/80 bg-white/90 p-3 shadow-[0_40px_120px_rgba(15,23,42,0.20)] backdrop-blur md:p-5">
+            <div class="mobile-cv-preview relative h-[460px] overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-blue-900 to-blue-700 p-5">
               <div class="relative z-10 flex h-full overflow-hidden rounded-[1.5rem] bg-white shadow-2xl">
                 <aside class="w-[35%] bg-blue-950 p-4 text-white">
                   <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-lg font-black text-slate-950">EL</div>
@@ -154,7 +185,7 @@
           <h2 class="mb-5 text-4xl font-black tracking-tight md:text-5xl">Aperçu des CV réalisés</h2>
           <p class="text-lg leading-8 text-slate-600">Des modèles différents selon le niveau du profil : débutant, professionnel ou confirmé.</p>
         </div>
-        <div class="grid gap-8 md:grid-cols-3">
+        <div class="mobile-scroll grid gap-8 md:grid md:grid-cols-3">
           <div class="group relative overflow-hidden rounded-[2.5rem] border border-white/80 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 p-[1px] shadow-[0_30px_80px_rgba(15,23,42,0.18)] transition duration-500 hover:-translate-y-3 hover:shadow-[0_40px_120px_rgba(15,23,42,0.28)]">
             <div class="rounded-[2.4rem] bg-white p-6">
               <div class="mb-5 flex items-center justify-between">
@@ -506,8 +537,27 @@
     </section>
   </main>
 
-  <footer class="border-t border-amber-900/10 bg-[#f7f3ec] py-8 text-center text-sm text-slate-500">
+  <div class="mobile-sticky-cta md:hidden">
+    <a href="#contact" class="bg-slate-950 text-white">Demander mon CV</a>
+    <a href="#tarifs" class="bg-amber-700 text-white">Voir les tarifs</a>
+  </div>
+
+  <footer class="border-t border-amber-900/10 bg-[#f7f3ec] px-4 pb-24 pt-8 text-center text-sm text-slate-500 md:pb-8">
     <p>© 2026 Elpus — Création et modification de CV professionnels</p>
   </footer>
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        var targetId = this.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+        var target = document.querySelector(targetId);
+        if (!target) return;
+        event.preventDefault();
+        var offset = window.innerWidth < 768 ? 105 : 90;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
