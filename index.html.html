@@ -1,563 +1,79 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Elpus - Création & optimisation de CV</title>
-  <meta name="description" content="Elpus vous accompagne dans la création, la refonte et l’optimisation de CV professionnels." />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elpus - Création et optimisation de CV</title>
+  <meta name="description" content="Elpus accompagne les candidats dans la création, la refonte et l’optimisation de CV professionnels.">
   <style>
-    html { scroll-behavior: smooth; }
-    body { font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(245, 158, 11, .12), transparent 28%),
-        radial-gradient(circle at 80% 10%, rgba(15, 23, 42, .08), transparent 25%),
-        radial-gradient(circle at 50% 90%, rgba(180, 83, 9, .12), transparent 30%);
-      z-index: -2;
-    }
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: .035;
-      background-image: linear-gradient(90deg, #000 1px, transparent 1px), linear-gradient(#000 1px, transparent 1px);
-      background-size: 38px 38px;
-      z-index: -1;
-    }
-    .shine { position: relative; overflow: hidden; }
-    .shine::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      transform: translateX(-120%);
-      background: linear-gradient(110deg, transparent, rgba(255,255,255,.35), transparent);
-      transition: transform .8s ease;
-      pointer-events: none;
-    }
-    .shine:hover::after { transform: translateX(120%); }
-    .premium-card { transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
-    .premium-card:hover { transform: translateY(-10px); box-shadow: 0 35px 90px rgba(15,23,42,.18); border-color: rgba(180,83,9,.35); }
-    .gold-text { background: linear-gradient(90deg, #92400e, #f59e0b, #92400e); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-    .floaty { animation: floaty 5s ease-in-out infinite; }
-  
-    @media (max-width: 767px) {
-      body::after { background-size: 26px 26px; opacity: .025; }
-      header > div { padding: 14px 16px !important; }
-      header .gold-text { font-size: 1.55rem; }
-      header a[href="#contact"] { padding: 10px 14px !important; font-size: 12px !important; white-space: nowrap; }
-      section { scroll-margin-top: 88px; }
-      h1 { font-size: 2.65rem !important; line-height: .95 !important; letter-spacing: -0.04em; }
-      h2 { font-size: 2rem !important; line-height: 1.05 !important; letter-spacing: -0.035em; }
-      p { font-size: .98rem; }
-      .floaty { animation: none; }
-      .premium-card:hover { transform: none; box-shadow: inherit; }
-      .mobile-cv-preview { height: 360px !important; transform: scale(.92); transform-origin: top center; margin-bottom: -28px; }
-      .mobile-cv-preview aside { width: 37% !important; padding: 14px !important; }
-      .mobile-cv-preview main { padding: 14px !important; }
-      .mobile-scroll { display: flex !important; overflow-x: auto; gap: 14px; padding-bottom: 10px; scroll-snap-type: x mandatory; }
-      .mobile-scroll > * { min-width: 84%; scroll-snap-align: start; }
-      .mobile-scroll::-webkit-scrollbar { display: none; }
-      .mobile-sticky-cta { position: fixed; left: 14px; right: 14px; bottom: 14px; z-index: 9999; display: flex; gap: 10px; padding: 10px; border-radius: 22px; background: rgba(255,255,255,.92); backdrop-filter: blur(18px); box-shadow: 0 20px 60px rgba(15,23,42,.22); border: 1px solid rgba(180,83,9,.18); pointer-events: auto; }
-      .mobile-sticky-cta a { flex: 1; text-align: center; border-radius: 16px; padding: 12px 14px; font-weight: 800; font-size: 13px; }
-    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f7f3ec;color:#0f172a}
+    a{text-decoration:none;color:inherit}
+    .container{max-width:1160px;margin:auto;padding:0 22px}
+    .gold{background:linear-gradient(90deg,#92400e,#f59e0b,#92400e);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .btn{display:inline-block;border-radius:18px;padding:15px 24px;font-weight:900;text-align:center;border:0}
+    .btn-dark{background:#0f172a;color:white;box-shadow:0 20px 55px rgba(15,23,42,.22)}
+    .btn-dark:hover{background:#92400e}
+    .btn-light{background:white;border:1px solid rgba(146,64,14,.25);color:#0f172a}
+    .btn-light:hover{color:#92400e;border-color:#92400e}
+    header{position:sticky;top:0;z-index:50;background:rgba(247,243,236,.92);backdrop-filter:blur(15px);border-bottom:1px solid rgba(146,64,14,.12)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 22px}
+    .logo{font-size:28px;font-weight:950;letter-spacing:-.04em}
+    .logo-sub{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#b45309;font-weight:900}
+    .nav{display:flex;gap:8px;background:rgba(255,255,255,.85);border:1px solid rgba(146,64,14,.12);border-radius:999px;padding:8px}
+    .nav a{padding:9px 14px;border-radius:999px;font-size:14px;font-weight:800;color:#475569;white-space:nowrap}
+    .nav a:hover{background:#b45309;color:white}
+    .mobile-nav{display:none}
+    .hero{overflow:hidden;background:radial-gradient(circle at top left,rgba(251,191,36,.24),transparent 34%),linear-gradient(180deg,#f7f3ec 0%,#fffaf1 100%)}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:58px;align-items:center;padding:90px 0}
+    .pill{display:inline-flex;gap:10px;align-items:center;border:1px solid rgba(180,83,9,.22);background:rgba(255,255,255,.8);padding:12px 18px;border-radius:999px;color:#92400e;font-size:14px;font-weight:850}
+    .dot{width:8px;height:8px;border-radius:50%;background:#b45309}
+    .hero h1{font-size:70px;line-height:.94;letter-spacing:-.06em;margin:28px 0 26px;font-weight:1000}
+    .hero p{font-size:20px;line-height:1.65;color:#475569;max-width:650px}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:560px;margin-top:32px}
+    .stat{background:rgba(255,255,255,.75);border-radius:20px;padding:16px;text-align:center;box-shadow:0 12px 30px rgba(15,23,42,.05)}
+    .stat strong{display:block;font-size:26px}.stat span{font-size:12px;color:#64748b}
+    .preview-wrap{background:rgba(255,255,255,.92);border-radius:36px;padding:16px;box-shadow:0 45px 120px rgba(15,23,42,.2)}
+    .cv-preview{height:460px;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#1e3a8a,#1d4ed8);padding:18px}
+    .cv-paper{height:100%;display:flex;background:white;border-radius:24px;overflow:hidden;box-shadow:0 25px 60px rgba(15,23,42,.22)}
+    .cv-side{width:35%;background:#172554;color:white;padding:18px}
+    .avatar{height:64px;width:64px;border-radius:50%;background:white;color:#172554;display:grid;place-items:center;font-size:20px;font-weight:950;margin-bottom:16px}
+    .cv-side h4{margin:0;font-size:15px}.cv-side p{font-size:11px;color:#bfdbfe;margin:5px 0}
+    .line{height:1px;background:rgba(255,255,255,.15);margin:18px 0}
+    .mini-title{font-size:9px;text-transform:uppercase;letter-spacing:.18em;font-weight:950;color:rgba(255,255,255,.65);margin-bottom:10px}
+    .bar{height:6px;background:rgba(255,255,255,.16);border-radius:999px;margin:6px 0 12px}.bar span{display:block;height:100%;background:white;border-radius:999px}
+    .cv-main{flex:1;padding:20px}.cv-main h4{font-size:24px;margin:0}.cv-main p{font-size:12px;margin:6px 0 0;color:#64748b}
+    .fake-line{height:8px;border-radius:999px;background:#e2e8f0;margin:8px 0}.fake-light{height:8px;border-radius:999px;background:#f1f5f9;margin:8px 0}
+    .band{background:#0f172a;color:white;padding:22px 0}.band-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.band-item{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);border-radius:18px;padding:14px;text-align:center;color:#fef3c7;font-weight:850}
+    .section{padding:88px 0}.white{background:white}.cream{background:#f3eee6}.section-head{text-align:center;max-width:780px;margin:0 auto 54px}.kicker{font-size:13px;text-transform:uppercase;letter-spacing:.28em;color:#b45309;font-weight:950;margin-bottom:12px}.section h2{font-size:48px;line-height:1.02;letter-spacing:-.04em;margin:0 0 18px;font-weight:1000}.section-head p,.about p{font-size:18px;line-height:1.7;color:#64748b}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.card{background:#fbfaf7;border:1px solid #e2e8f0;border-radius:32px;padding:32px;box-shadow:0 12px 35px rgba(15,23,42,.04)}.card h3{font-size:24px;margin:0 0 14px;font-weight:950}.card p,.card li{color:#64748b;line-height:1.6}.icon{height:56px;width:56px;border-radius:18px;background:#0f172a;color:#fcd34d;display:grid;place-items:center;font-size:26px;margin-bottom:22px}
+    .examples{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}.example{border-radius:38px;padding:1px;background:linear-gradient(135deg,#0f172a,#b45309);box-shadow:0 35px 90px rgba(15,23,42,.18)}.example-inner{background:white;border-radius:37px;padding:24px}.example-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.badge{border-radius:16px;background:#0f172a;color:white;padding:9px 14px;font-size:12px;font-weight:900}.small-cv{height:410px;border:1px solid #e2e8f0;border-radius:28px;overflow:hidden;background:white;display:flex}.small-side{width:35%;background:#0f172a;color:white;padding:16px}.small-main{flex:1;padding:18px}.blue .small-side,.blue .badge{background:#1e3a8a}.gold-card .small-side,.gold-card .badge{background:#b45309}.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}.metric{background:#fef3c7;border-radius:16px;padding:12px;text-align:center}.metric strong{display:block;color:#b45309;font-size:22px}
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.price-card{position:relative;background:#fbfaf7;border:2px solid #22c55e;border-radius:32px;padding:34px;box-shadow:0 18px 50px rgba(15,23,42,.08)}.price-card.pro{border-color:#3b82f6;background:white;transform:scale(1.03);box-shadow:0 30px 90px rgba(37,99,235,.18)}.price-card.premium{border-color:#a855f7}.popular{position:absolute;right:22px;top:-13px;background:#2563eb;color:white;border-radius:999px;padding:7px 14px;font-size:12px;font-weight:950}.price{font-size:52px;font-weight:1000;margin:10px 0 22px}.price-card ul{list-style:none;margin:0;padding:0}.price-card li{margin:12px 0;color:#475569;line-height:1.5}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center}.dark-panel{background:#0f172a;color:white;border-radius:38px;padding:34px;box-shadow:0 35px 100px rgba(15,23,42,.18)}.dark-panel p{color:#cbd5e1}.dark-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.dark-box{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);border-radius:24px;padding:18px}.steps{background:#0f172a;color:white}.step{display:flex;gap:16px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);border-radius:24px;padding:18px;margin:12px 0}.num{height:42px;width:42px;border-radius:16px;background:#fbbf24;color:#0f172a;display:grid;place-items:center;font-weight:950;flex:none}
+    .trust{display:grid;grid-template-columns:1fr 1fr;gap:34px}.chips{display:grid;grid-template-columns:1fr 1fr;gap:12px}.chip{background:#f7f3ec;border-radius:18px;padding:14px;font-weight:850}.reviews{background:#0f172a;color:white;border-radius:32px;padding:32px}.review{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);border-radius:24px;padding:20px;margin-bottom:14px}.stars{color:#fbbf24}.faq{max-width:900px;margin:auto}.faq-item{background:white;border-radius:24px;padding:24px;margin:14px 0;box-shadow:0 10px 28px rgba(15,23,42,.04)}
+    .contact-box{background:white;border:1px solid rgba(146,64,14,.12);border-radius:38px;padding:34px;box-shadow:0 40px 120px rgba(15,23,42,.16)}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left}.contact-field{background:#f8f5ef;border:1px solid #e2e8f0;border-radius:18px;padding:16px;color:#64748b}.contact-field strong{display:block;color:#334155;margin-bottom:6px}.contact-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:22px}.mobile-cta{display:none}footer{text-align:center;color:#64748b;padding:30px;border-top:1px solid rgba(146,64,14,.12)}
+    @media(max-width:900px){.nav{display:none}.mobile-nav{display:block;position:absolute;left:0;right:0;top:100%;padding:10px 14px;background:rgba(247,243,236,.96);border-bottom:1px solid rgba(146,64,14,.12);overflow-x:auto;white-space:nowrap}.mobile-nav a{display:inline-block;background:white;border-radius:999px;padding:9px 14px;font-size:12px;font-weight:900;margin-right:6px}.header-inner{padding:14px}.logo{font-size:26px}.header-inner .btn{font-size:12px;padding:11px 14px}.hero-grid{grid-template-columns:1fr;padding:120px 0 55px;gap:36px}.hero h1{font-size:43px}.hero p{font-size:16px}.hero-actions .btn{width:100%}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:22px}.preview-wrap{padding:10px;border-radius:28px}.cv-preview{height:360px;padding:12px}.cv-side{padding:12px}.cv-main{padding:12px}.band-grid{grid-template-columns:1fr 1fr}.section{padding:62px 0}.section h2{font-size:34px}.section-head p,.about p{font-size:16px}.grid-3,.grid-4,.pricing,.two-col,.trust,.contact-grid{grid-template-columns:1fr}.examples{display:flex;overflow-x:auto;gap:16px;scroll-snap-type:x mandatory}.example{min-width:86%;scroll-snap-align:start}.price-card.pro{transform:none}.dark-grid,.chips{grid-template-columns:1fr}.mobile-cta{position:fixed;left:12px;right:12px;bottom:12px;z-index:80;display:flex;gap:10px;padding:10px;border-radius:22px;background:rgba(255,255,255,.88);backdrop-filter:blur(18px);box-shadow:0 20px 60px rgba(15,23,42,.22);border:1px solid rgba(180,83,9,.18)}.mobile-cta a{flex:1;text-align:center;border-radius:16px;padding:12px 10px;font-size:13px;font-weight:900;color:white}.mobile-cta a:first-child{background:#0f172a}.mobile-cta a:last-child{background:#b45309}footer{padding-bottom:90px}}
   </style>
 </head>
-<body class="bg-[#f7f3ec] text-slate-950">
-  <header class="sticky top-0 z-50 border-b border-amber-900/10 bg-[#f7f3ec]/75 shadow-sm backdrop-blur-2xl">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-      <a href="#top">
-        <div class="text-2xl font-black tracking-tight gold-text">Elpus</div>
-        <div class="text-xs uppercase tracking-[0.28em] text-amber-700">CV Premium</div>
-      </a>
-      <nav class="hidden items-center gap-3 rounded-full border border-amber-900/10 bg-white/80 px-3 py-2 shadow-lg md:flex">
-        <a href="#services" class="rounded-full px-5 py-2 text-sm font-bold text-slate-700 hover:bg-amber-700 hover:text-white">Services</a>
-        <a href="#apropos" class="rounded-full px-5 py-2 text-sm font-bold text-slate-700 hover:bg-amber-700 hover:text-white">À propos</a>
-        <a href="#fonctionnement" class="rounded-full px-5 py-2 text-sm font-bold text-slate-700 hover:bg-amber-700 hover:text-white">Fonctionnement</a>
-        <a href="#tarifs" class="rounded-full px-5 py-2 text-sm font-bold text-slate-700 hover:bg-amber-700 hover:text-white">Tarifs</a>
-        <a href="#avis" class="rounded-full px-5 py-2 text-sm font-bold text-slate-700 hover:bg-amber-700 hover:text-white">Avis</a>
-      </nav>
-      <div class="absolute left-0 right-0 top-full z-[9999] border-b border-amber-900/10 bg-[#f7f3ec]/95 px-4 py-3 backdrop-blur-xl md:hidden">
-        <div class="flex gap-2 overflow-x-auto">
-          <a href="#services" class="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm">Services</a>
-          <a href="#apropos" class="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm">À propos</a>
-          <a href="#fonctionnement" class="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm">Fonctionnement</a>
-          <a href="#tarifs" class="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm">Tarifs</a>
-          <a href="#avis" class="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm">Avis</a>
-        </div>
-      </div>
-      <a href="#contact" class="shine rounded-full bg-slate-950 px-6 py-3 text-sm font-bold text-white shadow-xl shadow-slate-900/20 transition hover:bg-amber-800">Demander mon CV</a>
-    </div>
-  </header>
-
+<body>
+  <header><div class="header-inner container"><a href="#top"><div class="logo gold">Elpus</div><div class="logo-sub">CV Premium</div></a><nav class="nav"><a href="#services">Services</a><a href="#apropos">À propos</a><a href="#fonctionnement">Fonctionnement</a><a href="#tarifs">Tarifs</a><a href="#avis">Avis</a></nav><div class="mobile-nav"><a href="#services">Services</a><a href="#apropos">À propos</a><a href="#fonctionnement">Fonctionnement</a><a href="#tarifs">Tarifs</a><a href="#avis">Avis</a></div><a href="#contact" class="btn btn-dark">Demander mon CV</a></div></header>
   <main id="top">
-    <section class="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,.22),transparent_34%),linear-gradient(180deg,#f7f3ec_0%,#fffaf1_100%)]">
-      <div class="absolute left-1/2 top-0 h-[620px] w-[620px] -translate-x-1/2 rounded-full bg-amber-300/30 blur-3xl"></div>
-      <div class="absolute -right-40 top-24 h-[420px] w-[420px] rounded-full bg-slate-950/10 blur-3xl"></div>
-      <div class="absolute -left-40 bottom-0 h-[420px] w-[420px] rounded-full bg-amber-700/10 blur-3xl"></div>
-      <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-28 md:grid-cols-2 md:px-6 md:py-28">
-        <div class="relative z-10">
-          <div class="mb-7 inline-flex items-center gap-3 rounded-full border border-amber-700/20 bg-white/70 px-5 py-3 text-sm font-semibold text-amber-800 shadow-sm">
-            <span class="h-2 w-2 rounded-full bg-amber-600"></span>
-            Création & optimisation de CV premium
-          </div>
-          <h1 class="mb-7 max-w-3xl text-5xl font-black leading-[0.95] tracking-tight md:text-7xl">Un CV qui <span class="gold-text">attire l’attention</span> et inspire confiance dès les premières secondes.</h1>
-          <p class="mb-9 max-w-2xl text-lg leading-8 text-slate-700 md:text-xl">Je vous aide à transformer votre parcours en un CV clair, moderne et professionnel, adapté aux recruteurs et au poste que vous visez.</p>
-          <div class="flex flex-col gap-4 sm:flex-row">
-            <a href="#contact" class="shine rounded-2xl bg-slate-950 px-8 py-4 text-center font-bold text-white shadow-2xl shadow-slate-900/25 transition hover:-translate-y-1 hover:bg-amber-800">Être accompagné maintenant</a>
-            <a href="#services" class="rounded-2xl border border-amber-700/30 bg-white/80 px-8 py-4 text-center font-bold shadow-lg shadow-amber-900/5 transition hover:-translate-y-1 hover:border-amber-700 hover:text-amber-800">Voir l’accompagnement</a>
-          </div>
-          <div class="mt-10 grid max-w-xl grid-cols-3 gap-4 text-center">
-            <div class="rounded-2xl bg-white/70 p-4 shadow-sm"><div class="text-2xl font-black">PDF</div><div class="text-xs text-slate-500">prêt à envoyer</div></div>
-            <div class="rounded-2xl bg-white/70 p-4 shadow-sm"><div class="text-2xl font-black">100%</div><div class="text-xs text-slate-500">personnalisé</div></div>
-            <div class="rounded-2xl bg-white/70 p-4 shadow-sm"><div class="text-2xl font-black">Tous</div><div class="text-xs text-slate-500">profils</div></div>
-          </div>
-        </div>
-
-        <div class="relative z-10">
-          <div class="absolute -left-6 top-10 z-20 hidden rounded-2xl bg-white px-5 py-4 shadow-xl md:block">
-            <div class="text-sm font-black">+ de clarté</div><div class="text-xs text-slate-500">profil mieux valorisé</div>
-          </div>
-          <div class="absolute -bottom-6 right-8 z-20 hidden rounded-2xl bg-amber-400 px-5 py-4 shadow-xl md:block">
-            <div class="text-sm font-black">Prêt à postuler</div><div class="text-xs text-slate-800">PDF professionnel</div>
-          </div>
-          <div class="floaty rounded-[2.5rem] border border-white/80 bg-white/90 p-3 shadow-[0_40px_120px_rgba(15,23,42,0.20)] backdrop-blur md:p-5">
-            <div class="mobile-cv-preview relative h-[460px] overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-blue-900 to-blue-700 p-5">
-              <div class="relative z-10 flex h-full overflow-hidden rounded-[1.5rem] bg-white shadow-2xl">
-                <aside class="w-[35%] bg-blue-950 p-4 text-white">
-                  <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-lg font-black text-slate-950">EL</div>
-                  <h4 class="text-sm font-black leading-tight">Emma Laurent</h4>
-                  <p class="mt-1 text-[10px] text-white/70">Chargée d’accueil</p>
-                  <div class="my-5 h-px bg-white/20"></div>
-                  <p class="mb-2 text-[9px] font-bold uppercase tracking-[0.18em] text-white/60">Contact</p>
-                  <div class="space-y-2 text-[9px] text-white/75"><p>📍 Ville</p><p>✉ email@mail.fr</p><p>📞 06 00 00 00 00</p></div>
-                  <div class="my-5 h-px bg-white/20"></div>
-                  <p class="mb-2 text-[9px] font-bold uppercase tracking-[0.18em] text-white/60">Compétences</p>
-                  <div class="space-y-3"><div><p class="mb-1 text-[9px]">Accueil</p><div class="h-1.5 rounded bg-white/20"><div class="h-1.5 w-4/5 rounded bg-white"></div></div></div><div><p class="mb-1 text-[9px]">Rigueur</p><div class="h-1.5 rounded bg-white/20"><div class="h-1.5 w-3/4 rounded bg-white"></div></div></div></div>
-                </aside>
-                <main class="flex-1 p-5">
-                  <div class="mb-5 border-b border-slate-100 pb-4"><p class="mb-1 text-[9px] font-bold uppercase tracking-[0.22em] text-slate-400">Curriculum Vitae</p><h4 class="text-xl font-black leading-none">Emma Laurent</h4><p class="mt-1 text-xs font-semibold text-slate-500">Chargée d’accueil</p></div>
-                  <div class="mb-5"><p class="mb-2 text-[10px] font-black uppercase tracking-[0.16em]">À propos</p><div class="space-y-2"><div class="h-2 rounded bg-slate-200"></div><div class="h-2 w-11/12 rounded bg-slate-100"></div></div></div>
-                  <div class="mb-5"><p class="mb-2 text-[10px] font-black uppercase tracking-[0.16em]">Expériences</p><div class="space-y-2"><div class="h-2 rounded bg-slate-200"></div><div class="h-2 w-11/12 rounded bg-slate-100"></div><div class="h-2 w-4/5 rounded bg-slate-100"></div></div></div>
-                  <div class="mb-5"><p class="mb-2 text-[10px] font-black uppercase tracking-[0.16em]">Formation</p><div class="space-y-2"><div class="h-2 rounded bg-slate-200"></div><div class="h-2 w-3/4 rounded bg-slate-100"></div></div></div>
-                </main>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="border-y border-amber-900/10 bg-slate-950 py-5 text-white">
-      <div class="mx-auto grid max-w-7xl gap-4 px-6 text-center sm:grid-cols-2 md:grid-cols-4">
-        <div class="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm font-bold text-amber-100">✦ Réponse rapide</div>
-        <div class="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm font-bold text-amber-100">✦ CV clair et moderne</div>
-        <div class="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm font-bold text-amber-100">✦ Accompagnement humain</div>
-        <div class="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm font-bold text-amber-100">✦ Fichier prêt à envoyer</div>
-      </div>
-    </section>
-
-    <section id="services" class="bg-white py-24">
-      <div class="mx-auto max-w-7xl px-6">
-        <div class="mx-auto mb-16 max-w-3xl text-center">
-          <p class="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-amber-700">Services</p>
-          <h2 class="mb-5 text-4xl font-black tracking-tight md:text-5xl">Un accompagnement sérieux, humain et rassurant</h2>
-          <p class="text-lg leading-8 text-slate-600">Le but n’est pas seulement de faire joli : le CV doit être clair, crédible et adapté à votre objectif professionnel.</p>
-        </div>
-        <div class="grid gap-6 md:grid-cols-3">
-          <article class="premium-card rounded-[2rem] border border-slate-200 bg-[#fbfaf7] p-8 shadow-sm"><div class="mb-7 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-2xl text-amber-300">✦</div><h3 class="mb-4 text-2xl font-black">Création complète</h3><p class="leading-7 text-slate-600">Un CV moderne réalisé à partir de vos informations, pensé pour être clair, professionnel et agréable à lire.</p></article>
-          <article class="premium-card rounded-[2rem] border border-slate-200 bg-[#fbfaf7] p-8 shadow-sm"><div class="mb-7 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-2xl text-amber-300">◆</div><h3 class="mb-4 text-2xl font-black">Refonte de CV</h3><p class="leading-7 text-slate-600">Amélioration de votre CV actuel : structure, design, mise en valeur des expériences et formulation plus impactante.</p></article>
-          <article class="premium-card rounded-[2rem] border border-slate-200 bg-[#fbfaf7] p-8 shadow-sm"><div class="mb-7 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-2xl text-amber-300">✉</div><h3 class="mb-4 text-2xl font-black">Accompagnement personnalisé</h3><p class="leading-7 text-slate-600">Conseils pour adapter votre CV au poste visé, rassurer le recruteur et présenter votre parcours avec confiance.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-[#f3eee6] py-24">
-      <div class="mx-auto max-w-7xl px-6">
-        <div class="mx-auto mb-16 max-w-3xl text-center">
-          <p class="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-amber-700">Exemples</p>
-          <h2 class="mb-5 text-4xl font-black tracking-tight md:text-5xl">Aperçu des CV réalisés</h2>
-          <p class="text-lg leading-8 text-slate-600">Des modèles différents selon le niveau du profil : débutant, professionnel ou confirmé.</p>
-        </div>
-        <div class="mobile-scroll grid gap-8 md:grid md:grid-cols-3">
-          <div class="group relative overflow-hidden rounded-[2.5rem] border border-white/80 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 p-[1px] shadow-[0_30px_80px_rgba(15,23,42,0.18)] transition duration-500 hover:-translate-y-3 hover:shadow-[0_40px_120px_rgba(15,23,42,0.28)]">
-            <div class="rounded-[2.4rem] bg-white p-6">
-              <div class="mb-5 flex items-center justify-between">
-                <div>
-                  <p class="text-[11px] font-bold uppercase tracking-[0.22em] text-slate-400">Junior profile</p>
-                  <h3 class="mt-1 text-2xl font-black text-slate-950">CV Débutant</h3>
-                </div>
-                <div class="rounded-2xl bg-slate-950 px-4 py-2 text-xs font-bold text-white shadow-lg">01</div>
-              </div>
-
-              <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-inner">
-                <div class="flex h-[420px]">
-                  <aside class="w-[34%] bg-slate-950 p-5 text-white">
-                    <div class="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-white text-lg font-black text-slate-950">LB</div>
-                    <h4 class="text-sm font-black">Lucas Bernard</h4>
-                    <p class="mt-1 text-[11px] text-slate-300">Étudiant en alternance</p>
-
-                    <div class="my-5 h-px bg-white/10"></div>
-
-                    <p class="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Compétences</p>
-                    <div class="space-y-3">
-                      <div>
-                        <div class="mb-1 flex justify-between text-[10px]"><span>Canva</span><span>85%</span></div>
-                        <div class="h-1.5 rounded-full bg-white/10"><div class="h-1.5 w-[85%] rounded-full bg-white"></div></div>
-                      </div>
-                      <div>
-                        <div class="mb-1 flex justify-between text-[10px]"><span>Communication</span><span>72%</span></div>
-                        <div class="h-1.5 rounded-full bg-white/10"><div class="h-1.5 w-[72%] rounded-full bg-white"></div></div>
-                      </div>
-                    </div>
-                  </aside>
-
-                  <main class="flex-1 p-5">
-                    <div class="mb-5 border-b border-slate-100 pb-4">
-                      <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Curriculum Vitae</p>
-                      <h4 class="mt-1 text-2xl font-black text-slate-950">Lucas Bernard</h4>
-                      <p class="text-sm font-medium text-slate-500">Recherche alternance marketing</p>
-                    </div>
-
-                    <div class="mb-5">
-                      <div class="mb-3 flex items-center gap-2">
-                        <div class="h-2 w-2 rounded-full bg-slate-950"></div>
-                        <p class="text-[11px] font-black uppercase tracking-[0.18em] text-slate-800">Profil</p>
-                      </div>
-                      <div class="space-y-2">
-                        <div class="h-2 rounded-full bg-slate-200"></div>
-                        <div class="h-2 w-5/6 rounded-full bg-slate-100"></div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div class="mb-3 flex items-center gap-2">
-                        <div class="h-2 w-2 rounded-full bg-slate-950"></div>
-                        <p class="text-[11px] font-black uppercase tracking-[0.18em] text-slate-800">Formation</p>
-                      </div>
-                      <div class="rounded-2xl bg-slate-50 p-4">
-                        <div class="mb-2 h-2 rounded-full bg-slate-300"></div>
-                        <div class="h-2 w-4/5 rounded-full bg-slate-200"></div>
-                      </div>
-                    </div>
-                  </main>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="group relative overflow-hidden rounded-[2.5rem] border border-blue-200 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-700 p-[1px] shadow-[0_30px_80px_rgba(30,64,175,0.20)] transition duration-500 hover:-translate-y-3 hover:shadow-[0_40px_120px_rgba(30,64,175,0.30)]">
-            <div class="rounded-[2.4rem] bg-white p-6">
-              <div class="mb-5 flex items-center justify-between">
-                <div>
-                  <p class="text-[11px] font-bold uppercase tracking-[0.22em] text-blue-500">Professional</p>
-                  <h3 class="mt-1 text-2xl font-black text-slate-950">CV Professionnel</h3>
-                </div>
-                <div class="rounded-2xl bg-blue-900 px-4 py-2 text-xs font-bold text-white shadow-lg">02</div>
-              </div>
-
-              <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-inner">
-                <div class="flex h-[420px]">
-                  <aside class="w-[34%] bg-blue-950 p-5 text-white">
-                    <div class="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-white text-lg font-black text-blue-950">EL</div>
-                    <h4 class="text-sm font-black">Emma Laurent</h4>
-                    <p class="mt-1 text-[11px] text-blue-100">Chargée d’accueil</p>
-
-                    <div class="my-5 h-px bg-white/10"></div>
-
-                    <p class="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-blue-200">Compétences</p>
-                    <div class="space-y-3">
-                      <div>
-                        <div class="mb-1 flex justify-between text-[10px]"><span>Gestion</span><span>90%</span></div>
-                        <div class="h-1.5 rounded-full bg-white/10"><div class="h-1.5 w-[90%] rounded-full bg-white"></div></div>
-                      </div>
-                      <div>
-                        <div class="mb-1 flex justify-between text-[10px]"><span>Relationnel</span><span>88%</span></div>
-                        <div class="h-1.5 rounded-full bg-white/10"><div class="h-1.5 w-[88%] rounded-full bg-white"></div></div>
-                      </div>
-                    </div>
-                  </aside>
-
-                  <main class="flex-1 p-5">
-                    <div class="mb-5 border-b border-slate-100 pb-4">
-                      <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Professional Resume</p>
-                      <h4 class="mt-1 text-2xl font-black text-slate-950">Emma Laurent</h4>
-                      <p class="text-sm font-medium text-slate-500">Gestion & relation client</p>
-                    </div>
-
-                    <div class="mb-5 rounded-2xl bg-blue-50 p-4">
-                      <div class="mb-2 h-2 rounded-full bg-blue-300"></div>
-                      <div class="mb-2 h-2 w-5/6 rounded-full bg-blue-200"></div>
-                      <div class="h-2 w-4/5 rounded-full bg-blue-100"></div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3">
-                      <div class="rounded-2xl bg-slate-50 p-4">
-                        <div class="mb-2 h-2 rounded-full bg-slate-300"></div>
-                        <div class="h-2 w-4/5 rounded-full bg-slate-200"></div>
-                      </div>
-                      <div class="rounded-2xl bg-slate-50 p-4">
-                        <div class="mb-2 h-2 rounded-full bg-slate-300"></div>
-                        <div class="h-2 w-3/4 rounded-full bg-slate-200"></div>
-                      </div>
-                    </div>
-                  </main>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="group relative overflow-hidden rounded-[2.5rem] border border-amber-200 bg-gradient-to-br from-amber-700 via-orange-600 to-amber-500 p-[1px] shadow-[0_30px_80px_rgba(180,83,9,0.22)] transition duration-500 hover:-translate-y-3 hover:shadow-[0_40px_120px_rgba(180,83,9,0.35)]">
-            <div class="rounded-[2.4rem] bg-white p-6">
-              <div class="mb-5 flex items-center justify-between">
-                <div>
-                  <p class="text-[11px] font-bold uppercase tracking-[0.22em] text-amber-600">Executive</p>
-                  <h3 class="mt-1 text-2xl font-black text-slate-950">CV Confirmé</h3>
-                </div>
-                <div class="rounded-2xl bg-amber-700 px-4 py-2 text-xs font-bold text-white shadow-lg">03</div>
-              </div>
-
-              <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-inner">
-                <div class="h-[420px] p-6">
-                  <div class="mb-5 flex items-center justify-between border-b border-slate-100 pb-5">
-                    <div>
-                      <h4 class="text-3xl font-black tracking-tight text-slate-950">Thomas Martin</h4>
-                      <p class="mt-1 text-sm font-medium text-slate-500">Responsable commercial senior</p>
-                    </div>
-                    <div class="rounded-2xl bg-amber-700 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white">Executive</div>
-                  </div>
-
-                  <div class="mb-5 grid grid-cols-3 gap-3">
-                    <div class="rounded-2xl bg-amber-50 p-4 text-center">
-                      <p class="text-2xl font-black text-amber-700">+7</p>
-                      <p class="mt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-amber-900">Années</p>
-                    </div>
-                    <div class="rounded-2xl bg-amber-50 p-4 text-center">
-                      <p class="text-2xl font-black text-amber-700">42%</p>
-                      <p class="mt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-amber-900">Croissance</p>
-                    </div>
-                    <div class="rounded-2xl bg-amber-50 p-4 text-center">
-                      <p class="text-2xl font-black text-amber-700">15+</p>
-                      <p class="mt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-amber-900">Projets</p>
-                    </div>
-                  </div>
-
-                  <div class="space-y-4">
-                    <div class="rounded-2xl border border-slate-100 p-4">
-                      <div class="mb-2 h-2 rounded-full bg-slate-300"></div>
-                      <div class="mb-2 h-2 w-5/6 rounded-full bg-slate-200"></div>
-                      <div class="h-2 w-3/4 rounded-full bg-slate-100"></div>
-                    </div>
-
-                    <div class="rounded-2xl border border-slate-100 p-4">
-                      <div class="mb-2 h-2 rounded-full bg-slate-300"></div>
-                      <div class="mb-2 h-2 w-4/5 rounded-full bg-slate-200"></div>
-                      <div class="h-2 w-2/3 rounded-full bg-slate-100"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="relative overflow-hidden py-28">
-      <div class="mx-auto max-w-7xl px-6">
-        <div class="mx-auto mb-16 max-w-3xl text-center"><p class="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-amber-700">Pourquoi Elpus</p><h2 class="text-4xl font-black tracking-tight md:text-5xl">Un service pensé pour rassurer et valoriser votre profil</h2></div>
-        <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-          <div class="premium-card rounded-[2rem] border border-white/70 bg-white/90 p-8 shadow-xl"><div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-xl font-black text-white">01</div><h3 class="mb-4 text-2xl font-black">Design soigné</h3><p class="leading-7 text-slate-600">Une présentation moderne, claire et professionnelle.</p></div>
-          <div class="premium-card rounded-[2rem] border border-white/70 bg-white/90 p-8 shadow-xl"><div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-xl font-black text-white">02</div><h3 class="mb-4 text-2xl font-black">Texte optimisé</h3><p class="leading-7 text-slate-600">Des phrases plus simples, rassurantes et efficaces.</p></div>
-          <div class="premium-card rounded-[2rem] border border-white/70 bg-white/90 p-8 shadow-xl"><div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-xl font-black text-white">03</div><h3 class="mb-4 text-2xl font-black">Tous profils</h3><p class="leading-7 text-slate-600">Stage, alternance, emploi, reconversion ou premier CV.</p></div>
-          <div class="premium-card rounded-[2rem] border border-white/70 bg-white/90 p-8 shadow-xl"><div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-xl font-black text-white">04</div><h3 class="mb-4 text-2xl font-black">Prêt à envoyer</h3><p class="leading-7 text-slate-600">Un fichier propre pour candidater plus facilement.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="apropos" class="bg-white py-24 border-y border-slate-100">
-      <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 md:grid-cols-2">
-        <div>
-          <p class="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-amber-700">À propos</p>
-          <h2 class="mb-6 text-4xl font-black tracking-tight md:text-5xl">Elpus, un service pensé pour aider les candidats à se démarquer</h2>
-          <p class="mb-6 text-lg leading-8 text-slate-600">Elpus accompagne les étudiants, jeunes diplômés, personnes en reconversion ou professionnels dans la création de CV modernes, clairs et professionnels.</p>
-          <p class="mb-6 text-lg leading-8 text-slate-600">L’objectif est simple : transformer un CV classique en un document plus impactant, rassurant et adapté aux attentes des recruteurs actuels.</p>
-          <p class="text-lg leading-8 text-slate-600">Chaque demande est traitée de manière personnalisée afin de mettre en valeur les compétences, les expériences et le potentiel de chaque profil.</p>
-        </div>
-
-        <div class="relative">
-          <div class="absolute -left-6 -top-6 h-40 w-40 rounded-full bg-amber-200/40 blur-3xl"></div>
-          <div class="relative overflow-hidden rounded-[2.5rem] border border-slate-200 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 p-8 shadow-[0_30px_100px_rgba(15,23,42,0.2)]">
-            <div class="mb-8 flex items-center justify-between">
-              <div>
-                <p class="text-sm font-bold uppercase tracking-[0.22em] text-amber-300">Elpus</p>
-                <h3 class="mt-2 text-3xl font-black text-white">Accompagnement CV</h3>
-              </div>
-              <div class="rounded-2xl bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur">Depuis 2026</div>
-            </div>
-
-            <div class="grid gap-4 sm:grid-cols-2">
-              <div class="rounded-3xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur">
-                <div class="mb-3 text-3xl">✓</div>
-                <h4 class="mb-2 text-lg font-black text-white">CV modernes</h4>
-                <p class="text-sm leading-6 text-slate-300">Designs professionnels adaptés aux recrutements actuels.</p>
-              </div>
-
-              <div class="rounded-3xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur">
-                <div class="mb-3 text-3xl">✦</div>
-                <h4 class="mb-2 text-lg font-black text-white">Accompagnement humain</h4>
-                <p class="text-sm leading-6 text-slate-300">Un échange simple et personnalisé selon votre profil.</p>
-              </div>
-
-              <div class="rounded-3xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur">
-                <div class="mb-3 text-3xl">⚡</div>
-                <h4 class="mb-2 text-lg font-black text-white">Réponse rapide</h4>
-                <p class="text-sm leading-6 text-slate-300">Traitement rapide des demandes et modifications.</p>
-              </div>
-
-              <div class="rounded-3xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur">
-                <div class="mb-3 text-3xl">📄</div>
-                <h4 class="mb-2 text-lg font-black text-white">Fichiers prêts</h4>
-                <p class="text-sm leading-6 text-slate-300">Livraison en PDF propre et prêt à être envoyé.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="fonctionnement" class="bg-white py-24">
-      <div class="mx-auto max-w-7xl px-6">
-        <div class="mx-auto mb-16 max-w-3xl text-center"><p class="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-amber-700">Fonctionnement</p><h2 class="mb-5 text-4xl font-black tracking-tight md:text-5xl">Comment fonctionne Elpus ?</h2><p class="text-lg leading-8 text-slate-600">Un accompagnement simple, sérieux et rassurant.</p></div>
-        <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-          <div class="premium-card rounded-[2rem] border border-slate-200 bg-[#fbfaf7] p-8 shadow-sm"><div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-xl font-black text-white">01</div><h3 class="mb-4 text-2xl font-black">Analyse du profil</h3><p class="leading-7 text-slate-600">Chaque demande est étudiée individuellement.</p></div>
-          <div class="premium-card rounded-[2rem] border border-slate-200 bg-[#fbfaf7] p-8 shadow-sm"><div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-xl font-black text-white">02</div><h3 class="mb-4 text-2xl font-black">Création personnalisée</h3><p class="leading-7 text-slate-600">Le CV est restructuré avec une mise en page moderne.</p></div>
-          <div class="premium-card rounded-[2rem] border border-slate-200 bg-[#fbfaf7] p-8 shadow-sm"><div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-xl font-black text-white">03</div><h3 class="mb-4 text-2xl font-black">Modifications</h3><p class="leading-7 text-slate-600">Des ajustements peuvent être réalisés selon vos attentes.</p></div>
-          <div class="premium-card rounded-[2rem] border border-slate-200 bg-[#fbfaf7] p-8 shadow-sm"><div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-xl font-black text-white">04</div><h3 class="mb-4 text-2xl font-black">Livraison finale</h3><p class="leading-7 text-slate-600">Le CV est envoyé en PDF prêt à être utilisé.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="process" class="bg-slate-950 py-24 text-white">
-      <div class="mx-auto grid max-w-7xl items-start gap-14 px-6 md:grid-cols-2">
-        <div><p class="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-amber-300">Méthode</p><h2 class="mb-6 text-4xl font-black tracking-tight md:text-5xl">Simple, rapide et sans stress</h2><p class="text-lg leading-8 text-slate-300">Vous n’avez pas besoin de savoir quoi écrire parfaitement. Je vous guide, je reformule et je structure les informations.</p></div>
-        <div class="space-y-5"><div class="rounded-3xl border border-white/10 bg-white/[0.04] p-5">1. Vous envoyez votre CV actuel ou vos informations.</div><div class="rounded-3xl border border-white/10 bg-white/[0.04] p-5">2. J’analyse votre profil et le poste recherché.</div><div class="rounded-3xl border border-white/10 bg-white/[0.04] p-5">3. Je crée une version claire et professionnelle.</div><div class="rounded-3xl border border-white/10 bg-white/[0.04] p-5">4. Vous recevez votre CV final.</div></div>
-      </div>
-    </section>
-
-    <section id="tarifs" class="relative overflow-hidden bg-white py-24">
-      <div class="absolute left-1/2 top-0 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-amber-300/10 blur-3xl"></div>
-      <div class="mx-auto max-w-7xl px-6">
-        <div class="mx-auto mb-14 max-w-3xl text-center"><p class="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-amber-700">Tarifs</p><h2 class="mb-5 text-4xl font-black tracking-tight md:text-5xl">Des offres simples et accessibles</h2></div>
-        <div class="grid gap-6 md:grid-cols-3">
-          <div class="premium-card rounded-[2rem] border-2 border-green-500 bg-[#fbfaf7] p-8 shadow-sm"><div class="mb-5 text-3xl">🟢</div><h3 class="mb-2 text-2xl font-black">Pack Essentiel</h3><div class="mb-6 text-5xl font-black">9€</div><ul class="space-y-3 text-slate-700"><li>✓ Correction du CV</li><li>✓ Mise en page plus propre</li><li>✓ Amélioration de la lisibilité</li></ul></div>
-          <div class="premium-card relative scale-[1.03] rounded-[2rem] border-2 border-blue-500 bg-white p-8 shadow-[0_30px_90px_rgba(37,99,235,.20)]"><div class="absolute -top-3 right-6 rounded-full bg-blue-600 px-4 py-1 text-xs font-bold text-white">⭐ Le plus choisi</div><div class="mb-5 text-3xl">🔵</div><h3 class="mb-2 text-2xl font-black">Pack Professionnel</h3><div class="mb-6 text-5xl font-black">19€</div><ul class="space-y-3 text-slate-700"><li>✓ Refonte complète du CV</li><li>✓ Design moderne</li><li>✓ Valorisation des compétences</li><li>✓ CV optimisé recruteurs</li></ul></div>
-          <div class="premium-card rounded-[2rem] border-2 border-purple-500 bg-[#fbfaf7] p-8 shadow-sm"><div class="mb-5 text-3xl">🟣</div><h3 class="mb-2 text-2xl font-black">Pack Premium</h3><div class="mb-6 text-5xl font-black">29€</div><ul class="space-y-3 text-slate-700"><li>✓ CV complet premium</li><li>✓ Optimisation avancée</li><li>✓ Conseils candidature</li><li>✓ Accompagnement personnalisé</li></ul></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-[#f3eee6] py-24">
-      <div class="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-2">
-        <div class="rounded-[2rem] bg-white p-8 shadow-sm"><p class="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-amber-700">Profils</p><h2 class="mb-6 text-3xl font-black">Pour qui ?</h2><div class="grid gap-3 sm:grid-cols-2"><div class="rounded-2xl bg-[#f7f3ec] px-4 py-3 font-semibold">✓ Étudiants</div><div class="rounded-2xl bg-[#f7f3ec] px-4 py-3 font-semibold">✓ Stages</div><div class="rounded-2xl bg-[#f7f3ec] px-4 py-3 font-semibold">✓ Alternance</div><div class="rounded-2xl bg-[#f7f3ec] px-4 py-3 font-semibold">✓ Recherche d’emploi</div><div class="rounded-2xl bg-[#f7f3ec] px-4 py-3 font-semibold">✓ Reconversion</div><div class="rounded-2xl bg-[#f7f3ec] px-4 py-3 font-semibold">✓ Tous secteurs</div></div></div>
-        <div id="avis" class="rounded-[2rem] bg-slate-950 p-8 text-white shadow-2xl">
-          <p class="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-amber-300">Confiance</p>
-          <h2 class="mb-8 text-3xl font-black">Les retours des clients</h2>
-
-          <div class="space-y-5">
-            <blockquote class="rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur">
-              <div class="mb-4 flex items-center justify-between">
-                <div>
-                  <p class="font-black text-white">Sarah M.</p>
-                  <p class="text-sm text-slate-400">Alternance communication</p>
-                </div>
-                <div class="text-amber-300">★★★★★</div>
-              </div>
-              <p class="leading-7 text-slate-200">“Franchement super surprise du résultat. Mon CV faisait très vide avant et maintenant il fait beaucoup plus professionnel. J’ai eu plusieurs réponses après mes candidatures.”</p>
-            </blockquote>
-
-            <blockquote class="rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur">
-              <div class="mb-4 flex items-center justify-between">
-                <div>
-                  <p class="font-black text-white">Lucas R.</p>
-                  <p class="text-sm text-slate-400">Recherche d’emploi</p>
-                </div>
-                <div class="text-amber-300">★★★★★</div>
-              </div>
-              <p class="leading-7 text-slate-200">“Très réactif et à l’écoute. Les expériences ont été beaucoup mieux reformulées et le design du CV donne vraiment une bonne image.”</p>
-            </blockquote>
-
-            <blockquote class="rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur">
-              <div class="mb-4 flex items-center justify-between">
-                <div>
-                  <p class="font-black text-white">Emma T.</p>
-                  <p class="text-sm text-slate-400">Stage BTS</p>
-                </div>
-                <div class="text-amber-300">★★★★★</div>
-              </div>
-              <p class="leading-7 text-slate-200">“Je ne savais pas du tout comment faire mon CV et j’ai été accompagnée du début à la fin. Résultat très propre et moderne.”</p>
-            </blockquote>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-[#f3eee6] py-24">
-      <div class="mx-auto max-w-5xl px-6">
-        <div class="mb-14 text-center"><p class="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-amber-700">Questions fréquentes</p><h2 class="text-4xl font-black tracking-tight md:text-5xl">Pour rassurer avant de passer à l’action</h2></div>
-        <div class="space-y-4"><div class="rounded-[1.5rem] bg-white p-6 shadow-sm"><h3 class="mb-2 text-xl font-black">Je n’ai pas encore de CV, est-ce possible ?</h3><p class="leading-7 text-slate-600">Oui, le CV peut être créé à partir de zéro.</p></div><div class="rounded-[1.5rem] bg-white p-6 shadow-sm"><h3 class="mb-2 text-xl font-black">Puis-je demander des modifications ?</h3><p class="leading-7 text-slate-600">Oui, des ajustements sont possibles selon la formule choisie.</p></div><div class="rounded-[1.5rem] bg-white p-6 shadow-sm"><h3 class="mb-2 text-xl font-black">En combien de temps vais-je recevoir mon CV ?</h3><p class="leading-7 text-slate-600">La plupart des demandes sont traitées rapidement selon la formule choisie et la complexité du profil.</p></div></div>
-      </div>
-    </section>
-
-    <section id="contact" class="mx-auto max-w-5xl px-6 py-24 text-center">
-      <p class="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-amber-700">Contact</p>
-      <h2 class="mb-5 text-4xl font-black tracking-tight md:text-5xl">Prêt à améliorer votre CV ?</h2>
-      <p class="mx-auto mb-10 max-w-2xl text-lg leading-8 text-slate-600">Envoyez-moi votre CV actuel, le poste recherché et vos informations.</p>
-      <div class="relative overflow-hidden rounded-[2.5rem] border border-amber-900/10 bg-white p-8 shadow-[0_40px_120px_rgba(15,23,42,.16)]">
-        <div class="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-amber-300/20 blur-3xl"></div>
-        <div class="absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-slate-950/10 blur-3xl"></div>
-        <form action="https://formsubmit.co/alexis.cvpro@gmail.com" method="POST" enctype="multipart/form-data" class="mx-auto max-w-3xl text-left">
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_subject" value="Nouvelle demande client - Elpus" />
-          <input type="hidden" name="_template" value="table" />
-          <div class="grid gap-5 md:grid-cols-2"><div><label class="mb-2 block text-sm font-bold">Nom</label><input type="text" name="Nom" required class="w-full rounded-2xl border border-slate-300 px-5 py-4 outline-none focus:border-amber-700" placeholder="Votre nom" /></div><div><label class="mb-2 block text-sm font-bold">Email</label><input type="email" name="Email" required class="w-full rounded-2xl border border-slate-300 px-5 py-4 outline-none focus:border-amber-700" placeholder="Votre adresse mail" /></div></div>
-          <div class="mt-5"><label class="mb-2 block text-sm font-bold">Sujet</label><input type="text" name="Sujet" required class="w-full rounded-2xl border border-slate-300 px-5 py-4 outline-none focus:border-amber-700" placeholder="Exemple : Demande de CV professionnel" /></div>
-          <div class="mt-5"><label class="mb-2 block text-sm font-bold">Ajouter votre CV</label><div class="rounded-2xl border-2 border-dashed border-slate-300 bg-[#f8f5ef] p-6"><input type="file" name="CV" accept=".pdf,.doc,.docx" class="block w-full cursor-pointer text-sm file:mr-4 file:rounded-xl file:border-0 file:bg-slate-950 file:px-5 file:py-3 file:font-bold file:text-white" /><p class="mt-3 text-sm text-slate-500">Formats acceptés : PDF, DOC, DOCX</p></div></div>
-          <div class="mt-5"><label class="mb-2 block text-sm font-bold">Message</label><textarea name="Message" required rows="6" class="w-full rounded-2xl border border-slate-300 px-5 py-4 outline-none focus:border-amber-700" placeholder="Expliquez votre besoin."></textarea></div>
-          <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row"><button type="submit" class="rounded-2xl bg-slate-950 px-8 py-4 font-bold text-white hover:bg-amber-800">Envoyer la demande</button><a href="https://www.facebook.com/profile.php?viewas=&id=61574415281375&show_switched_toast=false&show_switched_tooltip=false&is_tour_dismissed=false&is_tour_completed=false&show_podcast_settings=false&show_community_review_changes=false&should_open_composer=false&badge_type=NEW_MEMBER&show_community_rollback_toast=false&show_community_rollback=false&show_follower_visibility_disclosure=false&bypass_exit_warning=true" target="_blank" rel="noreferrer" class="rounded-2xl border border-slate-300 bg-white px-8 py-4 text-center font-bold hover:border-amber-700 hover:text-amber-800">Facebook</a></div>
-        </form>
-        <p class="mt-6 text-center text-sm text-slate-500">Les demandes arrivent directement sur : alexis.cvpro@gmail.com</p>
-      </div>
-    </section>
+    <section class="hero"><div class="container hero-grid"><div><div class="pill"><span class="dot"></span>Création & optimisation de CV premium</div><h1>Un CV qui <span class="gold">attire l’attention</span> et inspire confiance dès les premières secondes.</h1><p>Je vous aide à transformer votre parcours en un CV clair, moderne et professionnel, adapté aux recruteurs et au poste que vous visez.</p><div class="hero-actions"><a href="#contact" class="btn btn-dark">Être accompagné maintenant</a><a href="#services" class="btn btn-light">Voir l’accompagnement</a></div><div class="stats"><div class="stat"><strong>PDF</strong><span>prêt à envoyer</span></div><div class="stat"><strong>100%</strong><span>personnalisé</span></div><div class="stat"><strong>Tous</strong><span>profils</span></div></div></div><div class="preview-wrap"><div class="cv-preview"><div class="cv-paper"><aside class="cv-side"><div class="avatar">EL</div><h4>Emma Laurent</h4><p>Chargée d’accueil</p><div class="line"></div><div class="mini-title">Contact</div><p>📍 Ville</p><p>✉ email@mail.fr</p><p>📞 06 00 00 00 00</p><div class="line"></div><div class="mini-title">Compétences</div><p>Gestion</p><div class="bar"><span style="width:90%"></span></div><p>Relationnel</p><div class="bar"><span style="width:86%"></span></div></aside><main class="cv-main"><div style="border-bottom:1px solid #f1f5f9;padding-bottom:18px;margin-bottom:20px"><small style="font-weight:900;letter-spacing:.18em;color:#94a3b8">CURRICULUM VITAE</small><h4>Emma Laurent</h4><p>Gestion & relation client</p></div><div class="fake-line"></div><div class="fake-light" style="width:86%"></div><div class="fake-light" style="width:74%"></div><br><div class="fake-line" style="width:45%"></div><div class="fake-light"></div><div class="fake-light" style="width:80%"></div></main></div></div></div></div></section>
+    <section class="band"><div class="container band-grid"><div class="band-item">✦ Réponse rapide</div><div class="band-item">✦ CV clair et moderne</div><div class="band-item">✦ Accompagnement humain</div><div class="band-item">✦ Fichier prêt à envoyer</div></div></section>
+    <section id="services" class="section white"><div class="container"><div class="section-head"><div class="kicker">Services</div><h2>Un accompagnement sérieux, humain et rassurant</h2><p>Le but n’est pas seulement de faire joli : le CV doit être clair, crédible et adapté à votre objectif professionnel.</p></div><div class="grid-3"><div class="card"><div class="icon">✦</div><h3>Création complète</h3><p>Un CV moderne réalisé à partir de vos informations, pensé pour être clair, professionnel et agréable à lire.</p></div><div class="card"><div class="icon">◆</div><h3>Refonte de CV</h3><p>Amélioration de votre CV actuel : structure, design, mise en valeur des expériences et formulation plus impactante.</p></div><div class="card"><div class="icon">✉</div><h3>Accompagnement personnalisé</h3><p>Conseils pour adapter votre CV au poste visé, rassurer le recruteur et présenter votre parcours avec confiance. Accompagnement également pour la rédaction et l’optimisation des lettres de motivation.</p></div></div></div></section>
+    <section class="section cream"><div class="container"><div class="section-head"><div class="kicker">Exemples</div><h2>Aperçu des CV réalisés</h2><p>Des modèles différents selon le niveau du profil : débutant, professionnel ou confirmé.</p></div><div class="examples"><div class="example"><div class="example-inner"><div class="example-top"><div><div class="kicker">Junior profile</div><h3>CV Débutant</h3></div><div class="badge">01</div></div><div class="small-cv"><aside class="small-side"><div class="avatar">LB</div><h4>Lucas Bernard</h4><p>Alternance</p><div class="line"></div><div class="mini-title">Skills</div><div class="bar"><span style="width:78%"></span></div><div class="bar"><span style="width:64%"></span></div></aside><main class="small-main"><div class="fake-line"></div><div class="fake-light"></div><div class="fake-light" style="width:80%"></div><br><div class="fake-line" style="width:50%"></div><div class="fake-light"></div></main></div></div></div><div class="example blue"><div class="example-inner"><div class="example-top"><div><div class="kicker">Professional</div><h3>CV Professionnel</h3></div><div class="badge">02</div></div><div class="small-cv"><aside class="small-side"><div class="avatar">EL</div><h4>Emma Laurent</h4><p>Accueil</p><div class="line"></div><div class="mini-title">Skills</div><div class="bar"><span style="width:90%"></span></div><div class="bar"><span style="width:85%"></span></div></aside><main class="small-main"><div class="fake-line"></div><div class="fake-light"></div><div class="fake-light" style="width:85%"></div><br><div class="fake-line" style="width:60%"></div><div class="fake-light"></div><div class="fake-light" style="width:75%"></div></main></div></div></div><div class="example gold-card"><div class="example-inner"><div class="example-top"><div><div class="kicker">Executive</div><h3>CV Confirmé</h3></div><div class="badge">03</div></div><div class="small-cv" style="display:block;padding:20px"><h4 style="font-size:24px;margin:0">Thomas Martin</h4><p style="color:#64748b">Responsable commercial senior</p><div class="metric-grid"><div class="metric"><strong>+7</strong><small>années</small></div><div class="metric"><strong>42%</strong><small>croissance</small></div><div class="metric"><strong>15+</strong><small>projets</small></div></div><div class="fake-line"></div><div class="fake-light"></div><div class="fake-light" style="width:80%"></div><br><div class="fake-line"></div><div class="fake-light" style="width:85%"></div></div></div></div></div></div></section>
+    <section class="section"><div class="container"><div class="section-head"><div class="kicker">Pourquoi Elpus</div><h2>Un service pensé pour rassurer et valoriser votre profil</h2></div><div class="grid-4"><div class="card"><h3>01</h3><h3>Design soigné</h3><p>Une présentation moderne, claire et professionnelle.</p></div><div class="card"><h3>02</h3><h3>Texte optimisé</h3><p>Des phrases plus simples, rassurantes et efficaces.</p></div><div class="card"><h3>03</h3><h3>Tous profils</h3><p>Stage, alternance, emploi, reconversion ou premier CV.</p></div><div class="card"><h3>04</h3><h3>Prêt à envoyer</h3><p>Un fichier propre pour candidater plus facilement.</p></div></div></div></section>
+    <section id="apropos" class="section white"><div class="container two-col"><div class="about"><div class="kicker">À propos</div><h2>Elpus, un service pensé pour aider les candidats à se démarquer</h2><p>Elpus accompagne les étudiants, jeunes diplômés, personnes en reconversion ou professionnels dans la création de CV modernes, clairs et professionnels.</p><p>L’objectif est simple : transformer un CV classique en un document plus impactant, rassurant et adapté aux attentes des recruteurs actuels. Elpus accompagne également les candidats dans la création de lettres de motivation professionnelles et cohérentes avec leur profil.</p><p>Chaque demande est traitée de manière personnalisée afin de mettre en valeur les compétences, les expériences et le potentiel de chaque profil.</p></div><div class="dark-panel"><div class="kicker" style="color:#fbbf24">Elpus</div><h3 style="font-size:32px;margin-top:0">Accompagnement CV</h3><div class="dark-grid"><div class="dark-box"><h4>✓ CV modernes</h4><p>Designs professionnels adaptés aux recrutements actuels.</p></div><div class="dark-box"><h4>✦ Accompagnement humain</h4><p>Un échange simple et personnalisé selon votre profil.</p></div><div class="dark-box"><h4>⚡ Réponse rapide</h4><p>Traitement rapide des demandes et modifications.</p></div><div class="dark-box"><h4>📄 Fichiers prêts</h4><p>Livraison en PDF propre et prêt à être envoyé.</p></div></div></div></div></section>
+    <section id="fonctionnement" class="section white"><div class="container"><div class="section-head"><div class="kicker">Fonctionnement</div><h2>Comment fonctionne Elpus ?</h2><p>Un accompagnement simple, sérieux et rassurant.</p></div><div class="grid-4"><div class="card"><h3>01</h3><h3>Analyse du profil</h3><p>Chaque demande est étudiée individuellement.</p></div><div class="card"><h3>02</h3><h3>Création personnalisée</h3><p>Le CV est restructuré avec une mise en page moderne.</p></div><div class="card"><h3>03</h3><h3>Modifications</h3><p>Des ajustements peuvent être réalisés selon vos attentes.</p></div><div class="card"><h3>04</h3><h3>Livraison finale</h3><p>Le CV est envoyé en PDF prêt à être utilisé.</p></div></div></div></section>
+    <section id="process" class="section steps"><div class="container two-col"><div><div class="kicker" style="color:#fbbf24">Méthode</div><h2>Simple, rapide et sans stress</h2><p>Vous n’avez pas besoin de savoir quoi écrire parfaitement. Je vous guide, je reformule et je structure les informations.</p></div><div><div class="step"><div class="num">1</div><div>Vous envoyez votre CV actuel ou vos informations.</div></div><div class="step"><div class="num">2</div><div>J’analyse votre profil et le poste recherché.</div></div><div class="step"><div class="num">3</div><div>Je crée une version claire et professionnelle.</div></div><div class="step"><div class="num">4</div><div>Vous recevez votre CV final.</div></div></div></div></section>
+    <section id="tarifs" class="section white"><div class="container"><div class="section-head"><div class="kicker">Tarifs</div><h2>Des offres simples et accessibles</h2></div><div class="pricing"><div class="price-card"><div style="font-size:30px">🟢</div><h3>Pack Essentiel</h3><div class="price">9€</div><ul><li>✓ Correction du CV</li><li>✓ Mise en page plus propre</li><li>✓ Amélioration de la lisibilité</li></ul></div><div class="price-card pro"><div class="popular">⭐ Le plus choisi</div><div style="font-size:30px">🔵</div><h3>Pack Professionnel</h3><div class="price">19€</div><ul><li>✓ Refonte complète du CV</li><li>✓ Design moderne</li><li>✓ Valorisation des compétences</li><li>✓ CV optimisé recruteurs</li><li>✓ Lettre de motivation</li></ul></div><div class="price-card premium"><div style="font-size:30px">🟣</div><h3>Pack Premium</h3><div class="price">29€</div><ul><li>✓ CV complet premium</li><li>✓ Optimisation avancée</li><li>✓ Conseils candidature</li><li>✓ Accompagnement personnalisé</li><li>✓ Lettre de motivation</li><li>✓ Modifications complémentaires possibles</li></ul></div></div></div></section>
+    <section class="section cream"><div class="container trust"><div class="card"><div class="kicker">Profils</div><h2>Pour qui ?</h2><div class="chips"><div class="chip">✓ Étudiants</div><div class="chip">✓ Stages</div><div class="chip">✓ Alternance</div><div class="chip">✓ Recherche d’emploi</div><div class="chip">✓ Reconversion</div><div class="chip">✓ Tous secteurs</div></div></div><div id="avis" class="reviews"><div class="kicker" style="color:#fbbf24">Confiance</div><h2 style="font-size:32px">Les retours des clients</h2><div class="review"><strong>Sarah M.</strong><div class="stars">★★★★★</div><p>“Mon CV faisait très vide avant et maintenant il fait beaucoup plus professionnel.”</p></div><div class="review"><strong>Lucas R.</strong><div class="stars">★★★★★</div><p>“Très réactif et à l’écoute. Le design du CV donne vraiment une bonne image.”</p></div><div class="review"><strong>Emma T.</strong><div class="stars">★★★★★</div><p>“Je ne savais pas comment faire mon CV et j’ai été accompagnée du début à la fin.”</p></div></div></div></section>
+    <section class="section cream"><div class="container faq"><div class="section-head"><div class="kicker">Questions fréquentes</div><h2>Pour rassurer avant de passer à l’action</h2></div><div class="faq-item"><h3>Je n’ai pas encore de CV, est-ce possible ?</h3><p>Oui, le CV peut être créé à partir de zéro.</p></div><div class="faq-item"><h3>Puis-je demander des modifications ?</h3><p>Oui, des ajustements sont possibles selon la formule choisie.</p></div><div class="faq-item"><h3>En combien de temps vais-je recevoir mon CV ?</h3><p>La plupart des demandes sont traitées rapidement selon la formule choisie et la complexité du profil.</p></div></div></section>
+    <section id="contact" class="section"><div class="container" style="max-width:920px;text-align:center"><div class="kicker">Contact</div><h2>Prêt à améliorer votre CV ?</h2><p style="color:#64748b;font-size:18px;line-height:1.7">Le client clique sur le bouton, rédige son message dans sa messagerie et ajoute son CV en pièce jointe.</p><div class="contact-box"><div class="contact-grid"><div class="contact-field"><strong>1. Objet du message</strong>Demande de CV professionnel - Elpus</div><div class="contact-field"><strong>2. Informations à envoyer</strong>Nom, poste recherché, expériences, formule souhaitée</div><div class="contact-field"><strong>3. Pièce jointe</strong>Le client ajoute son CV en PDF, DOC ou DOCX dans son application mail.</div><div class="contact-field"><strong>4. Réception</strong>Les demandes arrivent sur : alexis.cvpro@gmail.com</div></div><div class="contact-actions"><a class="btn btn-dark" href="mailto:alexis.cvpro@gmail.com?subject=Demande%20de%20CV%20professionnel%20-%20Elpus">Envoyer un email</a><a class="btn btn-light" target="_blank" rel="noreferrer" href="https://www.facebook.com/profile.php?id=61574415281375">Facebook</a></div><p style="color:#64748b;font-size:14px;text-align:center;margin-top:20px">Email : alexis.cvpro@gmail.com</p></div></div></section>
   </main>
-
-  <div class="mobile-sticky-cta md:hidden">
-    <a href="#contact" class="bg-slate-950 text-white">Demander mon CV</a>
-    <a href="#tarifs" class="bg-amber-700 text-white">Voir les tarifs</a>
-  </div>
-
-  <footer class="border-t border-amber-900/10 bg-[#f7f3ec] px-4 pb-24 pt-8 text-center text-sm text-slate-500 md:pb-8">
-    <p>© 2026 Elpus — Création et modification de CV professionnels</p>
-  </footer>
-<script>
-    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
-      link.addEventListener('click', function(event) {
-        var targetId = this.getAttribute('href');
-        if (!targetId || targetId === '#') return;
-        var target = document.querySelector(targetId);
-        if (!target) return;
-        event.preventDefault();
-        var offset = window.innerWidth < 768 ? 105 : 90;
-        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-        window.scrollTo({ top: top, behavior: 'smooth' });
-      });
-    });
-  </script>
+  <div class="mobile-cta"><a href="#contact">Demander mon CV</a><a href="#tarifs">Voir les tarifs</a></div>
+  <footer>© 2026 Elpus — Création et modification de CV professionnels</footer>
 </body>
 </html>
